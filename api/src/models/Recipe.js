@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true,
       },
-      name: {
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -27,12 +27,12 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       //Nivel de comida saludable
-      health_score: {
+      healthScore: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       //Paso a paso
-      step_by_step: {
+      instructions: {
         type: DataTypes.TEXT,
         allowNull: false,
       },
