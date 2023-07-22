@@ -11,6 +11,7 @@ const postRecipes = async (req, res) => {
     await Recipe.findOrCreate({
       where: { title, image, summary, healthScore, instructions },
     });
+    res.status(200).json({ message: "Receta creada con exito" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

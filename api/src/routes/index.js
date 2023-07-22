@@ -10,7 +10,7 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-router.get("/recipes/:idRecipes", getDetail);
+router.get("/recipes/:id", getDetail);
 router.get("/recipes", getAllMatches);
 //router.get("/diets", getDiets);
 router.post("/recipes", postRecipes);

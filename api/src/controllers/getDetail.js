@@ -7,9 +7,7 @@ const { API_KEY } = process.env;
 const getDetail = async (req, res) => {
   try {
     const { id } = req.params;
-    const { data } = await axios(
-      `${URL}/${id}/information?apiKey=${API_KEY}&addRecipeInformation=true`
-    );
+    const { data } = await axios(`${URL}/${id}/information?apiKey=${API_KEY}`);
     const { title, image, summary, healthScore, instructions, diets } = data;
     const recipeApi = {
       title,

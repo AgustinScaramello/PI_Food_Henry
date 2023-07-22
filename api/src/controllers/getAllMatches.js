@@ -12,12 +12,12 @@ const getAllMatches = async (req, res) => {
     const { data } = await axios(
       `${URL}?apiKey=${API_KEY}&addRecipeInformation=true`
     );
-    const dataApi = data.filter((response) => {
+    const dataApi = data.results.filter((response) => {
       response.title.toLowerCase().includes(name.toLowerCase());
     });
 
     const dataLocal = await Recipe.findAll({
-      where: { [Op.like]: { title: `%${name}` } },
+      where: { title: { [Op.iLike]: `%${name}%` } },
     });
 
     const combinedData = [...dataApi, ...dataLocal];
@@ -27,7 +27,7 @@ const getAllMatches = async (req, res) => {
     } else {
       return res
         .status(404)
-        .json("No existe receta que coincida con el nombre recibido");
+        .json("No existe receta que coincida con el nombre indicado");
     }
   } catch (error) {
     return res.status(500).json({ error: error.message });
