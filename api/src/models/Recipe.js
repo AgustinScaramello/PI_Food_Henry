@@ -8,8 +8,8 @@ module.exports = (sequelize) => {
     "Recipe",
     {
       id: {
-        type: DataTypes.UUID,
-        defaultValue: () => uuidv4(),
+        type: DataTypes.INTEGER,
+        defaultValue: () => uuidv4().replace(/\D/g, "").substring(0, 8),
         allowNull: false,
         primaryKey: true,
       },

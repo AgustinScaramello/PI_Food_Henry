@@ -7,11 +7,17 @@ const postRecipes = async (req, res) => {
     return res.status(401).json({ error: "Faltan datos para crear la receta" });
   }
 
+  const recipeExists = await Recipe.findOne({ where: { title: title } });
+
   try {
-    await Recipe.findOrCreate({
-      where: { title, image, summary, healthScore, instructions },
-    });
-    res.status(200).json({ message: "Receta creada con exito" });
+    if (recipeExists) {
+      res.status(200).json({ message: `La receta ${title} ya existe` });
+    } else {
+      await Recipe.findOrCreate({
+        where: { title, image, summary, healthScore, instructions },
+      });
+      res.status(200).json({ message: "Receta creada con exito" });
+    }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
