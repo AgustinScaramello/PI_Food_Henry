@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
     {
       id: {
         type: DataTypes.INTEGER,
-        defaultValue: () => uuidv4().replace(/\D/g, "").substring(0, 8),
+        defaultValue: () => uuidv4().replace(/\D/g, "").substring(0, 7),
         allowNull: false,
         primaryKey: true,
       },

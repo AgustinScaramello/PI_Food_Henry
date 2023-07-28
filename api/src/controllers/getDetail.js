@@ -8,7 +8,7 @@ const getDetail = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const recipeLocal = await Recipe.findAll(id);
+    const recipeLocal = await Recipe.findByPk(id);
 
     const { data } = await axios(`${URL}/${id}/information?apiKey=${API_KEY}`);
     const { title, image, summary, healthScore, instructions, diets } = data;
@@ -21,18 +21,17 @@ const getDetail = async (req, res) => {
       diets,
     };
 
-    const combinedData = {
-      recipeApi,
-      recipeLocal,
-    };
+    if (recipeLocal !== null) {
+      res.status(200).json(recipeLocal);
+    }
 
-    if (combinedData) {
-      return res.status(200).json(combinedData);
+    if (recipeApi !== null) {
+      res.status(200).json(recipeApi);
     } else {
-      return res.status(404).json({ message: "La receta no existe" });
+      res.status(404).json({ message: "La receta no existe" });
     }
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
