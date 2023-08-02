@@ -1,7 +1,9 @@
 require("dotenv").config();
 const axios = require("axios");
-const { Diets } = require("../db");
+const { Diet } = require("../db");
 const { API_KEY, URL_ALL_RECIPES } = process.env;
+
+//------------------------------------------------------------
 
 const getDietsAPI = async () => {
   const { data } = await axios(
@@ -30,9 +32,13 @@ const getDietsAPI = async () => {
   return diets;
 };
 
+//------------------------------------------------------------
+
 const loadDietsBD = async (diets) => {
-  return await Diets.bulkCreate(diets);
+  return await Diet.bulkCreate(diets);
 };
+
+//------------------------------------------------------------
 
 module.exports = {
   getDietsAPI,

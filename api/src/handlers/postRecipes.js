@@ -4,10 +4,17 @@ const {
 } = require("../controllers/recipesController");
 
 const postRecipes = async (req, res) => {
-  const { title, image, summary, healthScore, instructions } = req.body;
+  const { title, image, summary, healthScore, instructions, diets } = req.body;
 
   try {
-    if (!title || !image || !summary || !healthScore || !instructions) {
+    if (
+      !title ||
+      !image ||
+      !summary ||
+      !healthScore ||
+      !instructions ||
+      !diets
+    ) {
       return res
         .status(401)
         .json({ error: "Faltan datos para crear la receta" });
@@ -23,7 +30,8 @@ const postRecipes = async (req, res) => {
         image,
         summary,
         healthScore,
-        instructions
+        instructions,
+        diets
       );
       res.status(201).json(createRecipe);
     }

@@ -1,28 +1,49 @@
 require("dotenv").config();
 const axios = require("axios");
 const { Op } = require("sequelize");
-const { Recipe } = require("../db");
+const { Recipe, Diet } = require("../db");
 const { API_KEY, URL_RECIPE, URL_ALL_RECIPES } = process.env;
+
+//------------------------------------------------------------
 
 const findRecipeByNameDB = async (title) => {
   return await Recipe.findOne({ where: { title: title } });
 };
+
+//------------------------------------------------------------
 
 const createRecipeDB = async (
   title,
   image,
   summary,
   healthScore,
-  instructions
+  instructions,
+  diets
 ) => {
-  return await Recipe.create({
+  const newRecipe = await Recipe.create({
     title,
     image,
     summary,
     healthScore,
     instructions,
   });
+
+  for (let i = 0; i < diets.length; i++) {
+    const dietName = diets[i];
+    const dietExists = await Diet.findOne({ where: { name: dietName } });
+
+    if (dietExists) {
+      await newRecipe.addDiet(dietExists);
+    } else {
+      const newDiet = await Diet.create({ name: dietName });
+      await newRecipe.addDiet(newDiet);
+    }
+  }
+
+  return newRecipe;
 };
+
+//------------------------------------------------------------
 
 const findRecipeByIdAPIyDB = async (id) => {
   const source = isNaN(id) ? "db" : "api";
@@ -39,15 +60,23 @@ const findRecipeByIdAPIyDB = async (id) => {
       healthScore,
       instructions,
       diets,
+      created: false,
     };
 
     return recipeApi;
   } else {
-    const recipeLocal = await Recipe.findByPk(id);
+    const recipeLocal = await Recipe.findByPk(id, {
+      include: {
+        model: Diet,
+        attributes: ["name"],
+      },
+    });
 
     return recipeLocal;
   }
 };
+
+//------------------------------------------------------------
 
 const findRecipesByMatchAPIyDB = async (name) => {
   //Pongo en minusculas la query
@@ -72,6 +101,8 @@ const findRecipesByMatchAPIyDB = async (name) => {
 
   return combinedData;
 };
+
+//------------------------------------------------------------
 
 module.exports = {
   findRecipeByNameDB,
