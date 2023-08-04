@@ -1,7 +1,13 @@
+import Cards from "../../components/cards/Cards";
+import SearchBar from "../../components/searchbar/SearchBar";
+import styled from "./Home.module.css"
+
 function Home() {
     return ( 
         <div>
-            <h1>Estas en el home</h1>
+            <h1 className={styled.home}>Home - PI Food</h1>
+            <SearchBar/>
+            <Cards/>
         </div>
      )
 }

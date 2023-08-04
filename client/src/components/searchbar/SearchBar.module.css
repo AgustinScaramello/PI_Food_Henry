@@ -1,0 +1,17 @@
+.containerSearchBar{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.inputSearchBar{
+    height: 30px;
+    width: 300px;
+    background-color: #f0debb;
+}
+
+.buttonSearchBar{
+    width: 100px;
+    background-color: #541734;
+    color: #f0debb;
+}

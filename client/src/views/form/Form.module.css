@@ -1,0 +1,42 @@
+.titleCreate{
+    color: #541734;
+    font-size: 60px;
+    margin: 10px 0 0 100px;
+}
+
+.formCreate{
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    margin: 50px 0 0 100px
+}
+
+.containerInputCreate{
+    margin-bottom: 50px;
+    flex-wrap: nowrap;
+}
+
+.labelCreate{
+    color: #f0debb;
+    font-size: 20px;
+}
+
+.inputCreate{
+    border-radius: 20px;
+    margin-left: 20px;
+    width: 600px;
+    height: 30px;
+    background-color: #541734;
+    color: #f0debb;
+    padding-left: 20px;
+    font-size: large;
+}
+
+.buttonCreate{
+    width: 200px;
+    height: 50px;
+    border-radius: 20px;
+    color: #f0debb;
+    font-size: large;
+    background-color: #541734;
+}
