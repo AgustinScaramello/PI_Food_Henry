@@ -1,12 +1,21 @@
+import {Link} from "react-router-dom"
 import styled from "./Card.module.css"
 
-function Card() {
+
+function Card({recipe}) {
+
+    const {title, image, diets, id} = recipe
+
+    const dietsList = Array.isArray(diets) ? diets.join(', ') : '';
+
     return ( 
-        <div className={styled.card}>
-            <h1>Card</h1>
-            <h3>Nombre: Milanesas</h3>
-            <h3>Tipo de dieta: Ninguna</h3>
-        </div>
+        <Link to={`/detail/${id}`} className={styled.linkDetail}>
+            <div className={styled.card}>
+                <img src={image} alt="" />
+                <h3 className={styled.titleCard}>{title}</h3>
+                <h3 className={styled.dietsCard}>Tipo de dieta: {dietsList}</h3>
+            </div>
+        </Link>
      )
 }
 

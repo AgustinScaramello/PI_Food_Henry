@@ -1,12 +1,49 @@
 .card{
+    position: relative;
     display: flex;
     flex-direction: column;
     height: 250px;
     background-color: #f0debb;
-    justify-content: space-evenly;
-    align-items: center;
     border-radius: 25px;
     color: #091c1a;
     margin-bottom: 30px;
     flex-basis: 40%;
+    overflow: hidden;
+    box-shadow: 1px 1px 15px 0px #091c1a;
+    border: 2px solid #091c1a;
+}
+
+.card img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.titleCard{
+    position: absolute;
+    color: #f0debb;
+    margin-top: 170px;
+    margin-left: 30px;
+    font-size: 17.5px;
+    text-shadow: 2px 2px 3px black;
+    -webkit-text-stroke: .5px black;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+} 
+
+.dietsCard{
+    position: absolute;
+    color: #f0debb;
+    margin-top: 200px;
+    margin-left: 30px;
+    font-size: 13px;
+    text-shadow: 2px 2px 3px black;
+    -webkit-text-stroke: .5px black;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.linkDetail{    
+    flex-basis: 40%;
+    text-decoration: none;
 }

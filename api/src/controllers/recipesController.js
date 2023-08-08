@@ -83,7 +83,7 @@ const findRecipesByMatchAPIyDB = async (name) => {
   const nameMin = name.toLowerCase();
 
   const { data } = await axios(
-    `${URL_ALL_RECIPES}?apiKey=${API_KEY}&number=40`
+    `${URL_ALL_RECIPES}?apiKey=${API_KEY}&number=40&addRecipeInformation=true`
   );
   const { results } = data;
 
@@ -93,11 +93,19 @@ const findRecipesByMatchAPIyDB = async (name) => {
   });
 
   //Filtro las recetas locales que en su titulo(con iLike no importa si esta en may o min) contengan la query
-  const resultsLocal = await Recipe.findAll({
-    where: { title: { [Op.iLike]: `%${name}%` } },
-  });
+  const resultsLocal = await Recipe.findAll(
+    {
+      where: { title: { [Op.iLike]: `%${name}%` } },
+    },
+    {
+      include: {
+        model: Diet,
+        attributes: ["name"],
+      },
+    }
+  );
 
-  const combinedData = [...resultsApi, ...resultsLocal];
+  const combinedData = [...resultsLocal, ...resultsApi];
 
   return combinedData;
 };
