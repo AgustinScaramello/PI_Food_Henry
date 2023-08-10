@@ -3,3 +3,38 @@
     font-size: 60px;
     margin: 10px 0 0 100px;
 }
+
+.filters{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    height: 30px;
+}
+
+.select{
+    background-color: #541734;
+    color: #f0debb;
+    width: 150px;
+}
+
+.paginator{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 60px;
+}
+
+.buttonPage{
+    height: 30px;
+    width: 30px;
+    background-color: #541734;
+    color: #f0debb;
+    font-size: 20px;
+    border-radius: 50px;
+}
+
+.numberPage{
+    color: #f0debb;
+    font-size: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
+}

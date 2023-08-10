@@ -23,7 +23,7 @@ function Detail() {
                 <img src={image} alt="" />
                 <h1 className={styled.nameDetail}>{title}</h1>
             </div>
-            <h3 className={styled.infoDetail}>Resumen de plato: {summary}</h3>
+            <h3 className={styled.infoDetail} >Resumen de plato: {summary}</h3>
             <h3 className={styled.infoDetail}>Nivel de comida saludable: {healthScore}</h3>
             <h3 className={styled.infoDetail}>Paso a paso: {instructions}</h3>
             <h3 className={styled.infoDetail}>Tipo de dieta: {diets}</h3>

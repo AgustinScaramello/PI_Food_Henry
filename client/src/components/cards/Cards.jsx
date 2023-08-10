@@ -1,9 +1,9 @@
 import Card from "../card/Card";
 import styled from "./Cards.module.css"
 
-function Cards({allRecipes}) {
+function Cards({recipes}) {
 
-    const recipesList = allRecipes
+    const recipesList = recipes
 
     return ( 
         <div className={styled.cards}>

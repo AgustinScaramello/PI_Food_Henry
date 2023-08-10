@@ -52,14 +52,25 @@ const findRecipeByIdAPIyDB = async (id) => {
     const { data } = await axios(
       `${URL_RECIPE}/${id}/information?apiKey=${API_KEY}`
     );
-    const { title, image, summary, healthScore, instructions, diets } = data;
-    const recipeApi = {
+    const {
+      vegetarian,
       title,
       image,
       summary,
       healthScore,
       instructions,
       diets,
+    } = data;
+
+    const isVegetarian = vegetarian === true ? "vegetarian" : undefined;
+
+    const recipeApi = {
+      title,
+      image,
+      summary,
+      healthScore,
+      instructions,
+      diets: [...diets, isVegetarian],
       created: false,
     };
 
@@ -88,8 +99,17 @@ const findRecipesByMatchAPIyDB = async (name) => {
   const { results } = data;
 
   //Filtro las recetas de la api que en su titulo(tambien lo pongo en minusculas) contengan la query
-  const resultsApi = results.filter((recipe) => {
+  const recipesApi = results.filter((recipe) => {
     return recipe.title.toLowerCase().includes(nameMin);
+  });
+
+  const resultsApi = recipesApi.map((recipe) => {
+    const isVegetarian = recipe.vegetarian === true ? "vegetarian" : undefined;
+    return {
+      ...recipe,
+      diets: [...recipe.diets, isVegetarian],
+      created: false,
+    };
   });
 
   //Filtro las recetas locales que en su titulo(con iLike no importa si esta en may o min) contengan la query
