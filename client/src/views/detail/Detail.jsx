@@ -27,7 +27,17 @@ function Detail() {
         )
     }
 
-    const {title, summary, healthScore, instructions, image, diets} = recipeDetail
+    const dietsIsAPIorDB = () => {
+        if(recipeDetail.Diets){
+            return recipeDetail.Diets.map((diet) => diet.name)
+        }else{
+            return recipeDetail.diets
+        }
+    }
+    
+    const {title, summary, healthScore, instructions, image, diets = dietsIsAPIorDB()} = recipeDetail
+
+    const dietsList = Array.isArray(diets) ? diets.join(', ') : '';
 
     const summaryRender = summary ? HTMLReactParser(summary.toString()) : summary
     const instructionsRender = instructions ? HTMLReactParser(instructions.toString()) : instructions
@@ -42,7 +52,7 @@ function Detail() {
             <h3 className={styled.infoDetail} >Resumen de plato: {summaryRender}</h3>
             <h3 className={styled.infoDetail}>Nivel de comida saludable: {healthScore}</h3>
             <h3 className={styled.infoDetail}>Paso a paso: {instructionsRender}</h3>
-            <h3 className={styled.infoDetail}>Tipo de dieta: {diets}</h3>
+            <h3 className={styled.infoDetail}>Tipo de dieta: {dietsList}</h3>
         </div>
      )
 }

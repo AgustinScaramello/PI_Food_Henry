@@ -8,6 +8,7 @@ export const FILTER_DIETS = "FILTER_DIETS";
 export const FILTER_ORIGIN = "FILTER_ORIGIN";
 export const ORDER_ALPHABETICALLY = "ORDER_ALPHABETICALLY";
 export const ORDER_HEALTH_SCORE = "ORDER_HEALTH_SCORE";
+export const POST_RECIPE = "POST_RECIPE";
 
 export function getRecipes() {
   return async function (dispatch) {
@@ -53,30 +54,44 @@ export function getDiets() {
   };
 }
 
-export const filterCardsByDiets = (diet) => {
+export function filterCardsByDiets(diet) {
   return {
     type: FILTER_DIETS,
     payload: diet,
   };
-};
+}
 
-export const filterCardsByOrigin = (origin) => {
+export function filterCardsByOrigin(origin) {
   return {
     type: FILTER_ORIGIN,
     payload: origin,
   };
-};
+}
 
-export const sortCardsAlphabetically = (order) => {
+export function sortCardsAlphabetically(order) {
   return {
     type: ORDER_ALPHABETICALLY,
     payload: order,
   };
-};
+}
 
-export const sortCardsByHealthScore = (healthScore) => {
+export function sortCardsByHealthScore(healthScore) {
   return {
     type: ORDER_HEALTH_SCORE,
     payload: healthScore,
   };
-};
+}
+
+export function postRecipe(newRecipe) {
+  return async function (dispatch) {
+    const response = await axios.post(
+      "http://localhost:3001/recipes",
+      newRecipe
+    );
+
+    return dispatch({
+      type: POST_RECIPE,
+      payload: response.data,
+    });
+  };
+}

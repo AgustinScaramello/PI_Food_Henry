@@ -7,6 +7,7 @@ import {
   GET_RECIPE_DETAIL,
   ORDER_ALPHABETICALLY,
   ORDER_HEALTH_SCORE,
+  POST_RECIPE,
 } from "../actions";
 
 let initialState = {
@@ -75,6 +76,11 @@ function rootReducer(state = initialState, action) {
             ? a.healthScore - b.healthScore
             : b.healthScore - a.healthScore
         ),
+      };
+    case POST_RECIPE:
+      return {
+        ...state,
+        postRecipe: [...state.postRecipe, action.payload],
       };
     default:
       return state;

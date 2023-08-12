@@ -4,7 +4,15 @@ import styled from "./Card.module.css"
 
 function Card({recipe}) {
 
-    const {title, image, diets, id} = recipe
+    const dietsIsAPIorDB = () => {
+        if(recipe.Diets){
+            return recipe.Diets.map((diet) => diet.name)
+        }else{
+            return recipe.diets
+        }
+    }
+
+    const {title, image, diets = dietsIsAPIorDB(), id} = recipe
 
     const dietsList = Array.isArray(diets) ? diets.join(', ') : '';
 

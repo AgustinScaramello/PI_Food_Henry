@@ -80,6 +80,7 @@ const findRecipeByIdAPIyDB = async (id) => {
       include: {
         model: Diet,
         attributes: ["name"],
+        through: { attributes: [] },
       },
     });
 
@@ -113,17 +114,14 @@ const findRecipesByMatchAPIyDB = async (name) => {
   });
 
   //Filtro las recetas locales que en su titulo(con iLike no importa si esta en may o min) contengan la query
-  const resultsLocal = await Recipe.findAll(
-    {
-      where: { title: { [Op.iLike]: `%${name}%` } },
+  const resultsLocal = await Recipe.findAll({
+    where: { title: { [Op.iLike]: `%${name}%` } },
+    include: {
+      model: Diet,
+      attributes: ["name"],
+      through: { attributes: [] },
     },
-    {
-      include: {
-        model: Diet,
-        attributes: ["name"],
-      },
-    }
-  );
+  });
 
   const combinedData = [...resultsLocal, ...resultsApi];
 
