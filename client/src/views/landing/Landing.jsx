@@ -1,16 +1,17 @@
 import {Link} from "react-router-dom"
+import styled from "./Landing.module.css"
 
 function Landing(){
-
-    
-
-    return(
-        <div>
-            <h1>Bienvenidos</h1>
-            <Link to={"/home"}>
-                Click aqui para ingresar
+    return(                
+        <div className={styled.divBienvenidos}>
+            <h1 className={styled.infochef}>#InfoChef</h1>
+            <h1 className={styled.bienvenidos}>Bienvenidos</h1>
+            <Link to={"/home"} className={styled.linkIngresar}>
+                Ingresar
             </Link>
         </div>
+            
+    
         
     )
 }

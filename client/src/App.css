@@ -5,6 +5,9 @@ html, body {
   }
 
 body {
-    background-image: linear-gradient(to bottom, #59a87d, #21635a);
-    background-attachment: fixed;
+  background-image: url("./components/images/landing-fondo.jpg");
+  background-size: cover; /* Cubrir toda la página */
+  background-repeat: no-repeat; /* No repetir la imagen */
+  background-attachment: fixed; /* Fijar la imagen para que se desplace con la página */
+  background-position: center center;
   }
