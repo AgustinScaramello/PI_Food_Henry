@@ -50,7 +50,7 @@ function rootReducer(state = initialState, action) {
         recipes: filteredDiets,
       };
     case FILTER_ORIGIN:
-      const filteredOrigin = state.recipes.filter((recipe) =>
+      const filteredOrigin = state.allRecipes.filter((recipe) =>
         action.payload === "API"
           ? recipe.created === false
           : recipe.created === true

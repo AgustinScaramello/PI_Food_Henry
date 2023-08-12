@@ -77,11 +77,23 @@ function Home() {
     //-----------------------------------------------------------------------------
 
 
+    const[loading, setLoading] = useState(true)
 
     useEffect(()=>{
-        dispatch(getRecipes())
-        dispatch(getDiets()) 
+        const fetchRecipesAndDiets = async () => {
+            await dispatch(getRecipes())
+            await dispatch(getDiets())
+            setLoading(false)
+        }
+        fetchRecipesAndDiets()        
     }, [dispatch])
+
+
+    if (loading){
+        return(
+            <div>Cargando...</div>
+        )
+    }
 
     return (
         <div>

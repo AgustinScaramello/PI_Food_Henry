@@ -17,7 +17,7 @@ const getDietsAPI = async () => {
   });
 
   //Concateno todos esos array pequeños que estan dentro del array mas grande
-  const allDiets = ["vegetarian"].concat(...mapRecipe);
+  const allDiets = ["ninguna", "vegetarian"].concat(...mapRecipe);
 
   //Quito todos los elementos repetidos
   const allUniqueDiets = allDiets.filter(
