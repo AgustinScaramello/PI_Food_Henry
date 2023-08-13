@@ -10,9 +10,6 @@ function Landing(){
                 Ingresar
             </Link>
         </div>
-            
-    
-        
     )
 }
 

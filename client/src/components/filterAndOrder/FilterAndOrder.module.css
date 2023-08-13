@@ -1,0 +1,12 @@
+.filters{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    height: 30px;
+}
+
+.select{
+    background-color: #541734;
+    color: #f0debb;
+    width: 150px;
+}

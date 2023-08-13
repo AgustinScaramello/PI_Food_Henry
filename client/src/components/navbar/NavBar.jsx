@@ -1,7 +1,16 @@
+import styled from "./NavBar.module.css"
+import { NavLink } from "react-router-dom";
+
 function NavBar() {
     return ( 
-        <div>
-            <h1>Estas es la navBar</h1>
+        <div className={styled.navBar}>
+            <div>
+                <h1>#InfoChef</h1> 
+            </div>
+            <div className={styled.navBarBottons}>
+                <NavLink to="/home" className={styled.links}>Home</NavLink>
+                <NavLink to="/create" className={styled.links}>Crear Receta</NavLink>
+            </div>
         </div>
      )
 }

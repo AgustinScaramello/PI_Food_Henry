@@ -17,13 +17,16 @@ function Card({recipe}) {
     const dietsList = Array.isArray(diets) ? diets.join(', ') : '';
 
     return ( 
-        <Link to={`/detail/${id}`} className={styled.linkDetail}>
+        <div className={styled.containerCard}>
+            <Link to={`/detail/${id}`} >
             <div className={styled.card}>
                 <img src={image} alt="" />
                 <h3 className={styled.titleCard}>{title}</h3>
                 <h3 className={styled.dietsCard}>Tipo de dieta: {dietsList}</h3>
             </div>
         </Link>
+        </div>
+        
      )
 }
 

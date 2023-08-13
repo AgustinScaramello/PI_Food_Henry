@@ -4,6 +4,8 @@ import {filterCardsByDiets, filterCardsByOrigin, getByName, getDiets, getRecipes
 
 import Cards from "../../components/cards/Cards";
 import SearchBar from "../../components/searchbar/SearchBar";
+import FilterAndOrder from "../../components/filterAndOrder/FilterAndOrder";
+import Paginator from "../../components/paginator/Paginator";
 import styled from "./Home.module.css"
 
 function Home() {
@@ -100,37 +102,17 @@ function Home() {
             <h1 className={styled.home}>Home - PI Food</h1>
             <SearchBar handleChange={handleChange} handleSubmit={handleSubmit} />
 
-            <div className={styled.filters}>
-                <select onChange={handleFilterByOrigin} className={styled.select}>
-                    <option hidden selected>Recipes By</option>
-                    <option value="AllRecipes">Todas las recetas</option>
-                    <option value="API">API</option>
-                    <option value="DB">DataBase</option>
-                </select>
-                <select onChange={handleFilterByDiet} className={styled.select}>
-                    <option hidden selected>Dietas</option>
-                    {diets?.map((diet) => (
-                        <option key={diet.id}>{diet.name}</option>))}
-                </select>
-                <select name="Ordenar" onChange={handleOrderAlphabetically} className={styled.select}>
-                    <option hidden selected>Orden</option>
-                    <option value="A">A - Z</option>
-                    <option value="D">Z - A</option>
-                </select>
-                <select onChange={handelOrderHealthScore} className={styled.select}>
-                    <option hidden selected>HealthScore</option>
-                    <option value="A">Ascendente</option>
-                    <option value="D">Descendente</option>
-                </select>
-            </div>
+            <FilterAndOrder  
+                handleFilterByOrigin={handleFilterByOrigin}
+                handleFilterByDiet={handleFilterByDiet}
+                handleOrderAlphabetically={handleOrderAlphabetically}
+                handelOrderHealthScore={handelOrderHealthScore}
+                diets={diets}
+            />
 
             <Cards recipes={recipeShow} />
 
-            <div className={styled.paginator}>
-                <button onClick={() => handlePaginator(currentPage - 1)} className={styled.buttonPage}>{"<"}</button>
-                <span className={styled.numberPage}>Pagina {currentPage}</span>
-                <button onClick={() => handlePaginator(currentPage + 1)} className={styled.buttonPage}>{">"}</button>
-            </div>
+            <Paginator currentPage={currentPage} handlePaginator={handlePaginator} />
         </div>
      )
 }
