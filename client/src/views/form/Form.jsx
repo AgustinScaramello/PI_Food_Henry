@@ -58,50 +58,52 @@ function Form() {
     }, [dispatch])
 
     return ( 
-        <div>
-            <h1 className={styled.titleCreate}>Crear Receta</h1>
+        <div className={styled.divGeneralCreate}>
+            <h1 className={styled.titleCreate}>Crear nueva receta</h1>
             <form className={styled.formCreate} onSubmit={handleSubmit}>
                 <div className={styled.containerInputCreate}>
                     <label htmlFor="" className={styled.labelCreate}>Nombre</label>
                     <input type="text" className={styled.inputCreate} name="title" value={newRecipe.title} onChange={handleChange} />
-                    <p>{errors.title}</p>
+                    <p className={styled.errorsCreate}>{errors.title}</p>
                 </div>
 
                 <div className={styled.containerInputCreate}>
                     <label htmlFor="" className={styled.labelCreate}>Resumen de plato</label>
                     <input type="text" className={styled.inputCreate} name="summary" value={newRecipe.summary} onChange={handleChange} />
-                    <p>{errors.summary}</p>
+                    <p className={styled.errorsCreate}>{errors.summary}</p>
                 </div>
 
                 <div className={styled.containerInputCreate}>
-                    <label htmlFor="" className={styled.labelCreate}>Nivel de comida saludable:</label>
+                    <label htmlFor="" className={styled.labelCreate}>Nivel de comida saludable</label>
                     <input type="number" max={100} min={0} className={styled.inputCreate} name="healthScore" value={newRecipe.healthScore} onChange={handleChange} />
-                    <p>{errors.healthScore}</p>
+                    <p className={styled.errorsCreate}>{errors.healthScore}</p>
                 </div>
 
                 <div className={styled.containerInputCreate}>
                     <label htmlFor="" className={styled.labelCreate}>Paso a paso</label>
                     <input type="text" className={styled.inputCreate} name="instructions" value={newRecipe.instructions} onChange={handleChange} />
-                    <p>{errors.instructions}</p>
+                    <p className={styled.errorsCreate}>{errors.instructions}</p>
                 </div>
 
                 <div className={styled.containerInputCreate}>
                     <label htmlFor="" className={styled.labelCreate}>Imagen</label>
                     <input type="url" className={styled.inputCreate} name="image" value={newRecipe.image} onChange={handleChange} />
-                    <p>{errors.image}</p>
+                    <p className={styled.errorsCreate}>{errors.image}</p>
                 </div>
 
-                <div>
+                <label htmlFor="" className={styled.labelDietsCreate}>Diets</label>
+                <div className={styled.containerDiets}>
                     {dietsList?.map((diet) => (
-                        <div className={styled.containerInputCreate} key={diet.id}>
-                            <label htmlFor="" className={styled.labelCreate} >{diet.name}</label>
-                            <input type="checkbox" value={diet.name} onChange={handleChangeDiet}/>
+                        <div className={styled.containerInputDietsCreate} key={diet.id}>
+                            <label htmlFor={diet.name} className={styled.labelDietsCheckbox} >{diet.name}</label>
+                            <input type="checkbox" id={diet.name} value={diet.name} onChange={handleChangeDiet} className={styled.inputDietsCreate} />
                         </div>
                     ))}
                 </div>
                 <p>{errors.diets}</p>
-
-                <button className={styled.buttonCreate} type="submit">Crear</button>
+                <div className={styled.containerButtonCreate}>
+                    <button className={styled.buttonCreate} type="submit">Crear</button>
+                </div>
             </form>
         </div>
      )

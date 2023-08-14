@@ -1,0 +1,28 @@
+.containerLoading{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading{
+    position: absolute;
+    font-size: 40px;
+    color: #541734;
+    text-shadow: 2px 2px 10px white;
+}
+
+.circle{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: 
+        radial-gradient(farthest-side,#541734 94%,#0000) top/16px 16px no-repeat,
+        conic-gradient(#0000 30%,#541734);
+    -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 16px),#000 0);
+    animation:s3 1s infinite linear;
+}
+
+@keyframes s3{ 
+    100%{transform: rotate(1turn)}
+}

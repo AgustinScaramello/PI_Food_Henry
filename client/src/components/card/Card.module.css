@@ -13,7 +13,7 @@
     color: #091c1a;
     overflow: hidden;
     box-shadow: 0 0 5px 0 black;
-    border: 5px solid #f0debb;
+    border: 5px solid #541734;
     transition: background-color 0.3s ease-in-out;
 }
 
@@ -38,6 +38,8 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    -webkit-filter: contrast(109%) saturate(150%);
+  filter: contrast(109%) saturate(150%);
 }
 
 .titleCard{

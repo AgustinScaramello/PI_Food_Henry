@@ -1,17 +1,37 @@
 .containerSearchBar{
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+}
+
+.shadow{
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 0 black;
 }
 
 .inputSearchBar{
     height: 30px;
     width: 300px;
     background-color: #f0debb;
+    border-radius: 10px 0 0 10px;
+    border: 0;
+    padding: 0 10px 0 20px;
 }
 
 .buttonSearchBar{
+    height: 30px;
     width: 100px;
     background-color: #541734;
     color: #f0debb;
+    border-radius: 0 10px 10px 0;
+    border: 0;
+    cursor: pointer;
+    text-shadow: 1px 1px 2px black;
+    transition: transform 0.3s ease-in-out;
+}
+
+.buttonSearchBar:hover{
+    transform: scale(1.1) ;
+    -webkit-transform: scale(1.1) ;
+    -moz-transform: scale(1.1) ;
 }

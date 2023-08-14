@@ -6,6 +6,7 @@ import Cards from "../../components/cards/Cards";
 import SearchBar from "../../components/searchbar/SearchBar";
 import FilterAndOrder from "../../components/filterAndOrder/FilterAndOrder";
 import Paginator from "../../components/paginator/Paginator";
+import Loading from "../../components/loading/Loading";
 import styled from "./Home.module.css"
 
 function Home() {
@@ -93,22 +94,24 @@ function Home() {
 
     if (loading){
         return(
-            <div>Cargando...</div>
+            <Loading/>
         )
     }
 
     return (
-        <div>
-            <h1 className={styled.home}>Home - PI Food</h1>
-            <SearchBar handleChange={handleChange} handleSubmit={handleSubmit} />
+        <div className={styled.containerHome}>
 
-            <FilterAndOrder  
-                handleFilterByOrigin={handleFilterByOrigin}
-                handleFilterByDiet={handleFilterByDiet}
-                handleOrderAlphabetically={handleOrderAlphabetically}
-                handelOrderHealthScore={handelOrderHealthScore}
-                diets={diets}
-            />
+            <div className={styled.filterAndSearch}>
+                <FilterAndOrder  
+                    handleFilterByOrigin={handleFilterByOrigin}
+                    handleFilterByDiet={handleFilterByDiet}
+                    handleOrderAlphabetically={handleOrderAlphabetically}
+                    handelOrderHealthScore={handelOrderHealthScore}
+                    diets={diets}
+                />
+
+                <SearchBar handleChange={handleChange} handleSubmit={handleSubmit} />
+            </div>
 
             <Cards recipes={recipeShow} />
 

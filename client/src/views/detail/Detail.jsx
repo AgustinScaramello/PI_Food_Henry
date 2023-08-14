@@ -4,6 +4,7 @@ import {useParams} from "react-router-dom"
 import styled from "./Detail.module.css"
 import { getRecipeDetail } from "../../redux/actions"
 import HTMLReactParser from 'html-react-parser';
+import Loading from "../../components/loading/Loading"
 
 function Detail() {
 
@@ -23,7 +24,7 @@ function Detail() {
 
     if (loading){
         return(
-            <div>Cargando...</div>
+            <Loading/>
         )
     }
 
@@ -45,14 +46,29 @@ function Detail() {
 
     return ( 
         <div className={styled.containerDetail}>
-            <div className={styled.imageDetail}>
+            <div className={styled.containerImageDetail}>
                 <img src={image} alt="" />
                 <h1 className={styled.nameDetail}>{title}</h1>
             </div>
-            <h3 className={styled.infoDetail} >Resumen de plato: {summaryRender}</h3>
-            <h3 className={styled.infoDetail}>Nivel de comida saludable: {healthScore}</h3>
-            <h3 className={styled.infoDetail}>Paso a paso: {instructionsRender}</h3>
-            <h3 className={styled.infoDetail}>Tipo de dieta: {dietsList}</h3>
+
+            <div className={styled.containerInfoDetail}>
+                <div>
+                    <h2 className={styled.indexInfoDetail}>Resumen de plato:</h2>
+                    <h3 className={styled.infoDetail} >{summaryRender}</h3>
+                </div>
+                <div>
+                    <h2 className={styled.indexInfoDetail}>Nivel de comida saludable:</h2>
+                    <h3 className={styled.infoDetail}>{healthScore}</h3>
+                </div>
+                <div>
+                    <h2 className={styled.indexInfoDetail}>Paso a paso:</h2>
+                    <h3 className={styled.infoDetail}>{instructionsRender}</h3>
+                </div>
+                <div>
+                    <h2 className={styled.indexInfoDetail}>Tipo de dieta:</h2>
+                    <h3 className={styled.infoDetail}>{dietsList}</h3>
+                </div>
+            </div>
         </div>
      )
 }

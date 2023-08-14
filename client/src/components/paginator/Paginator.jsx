@@ -4,7 +4,7 @@ function Paginator({currentPage, handlePaginator}){
     return(
         <div className={styled.paginator}>
                 <button onClick={() => handlePaginator(currentPage - 1)} className={styled.buttonPage}>{"<"}</button>
-                <span className={styled.numberPage}>Pagina {currentPage}</span>
+                <h1 className={styled.numberPage}>Pagina {currentPage}</h1>
                 <button onClick={() => handlePaginator(currentPage + 1)} className={styled.buttonPage}>{">"}</button>
             </div>
     )
