@@ -1,13 +1,35 @@
 .filters{
     display: flex;
+    align-items: center;
+}
+
+.buttonAllRecipes{
+    display: flex;
     justify-content: center;
+    align-items: center;
+    background-color: #541734;
+    color: #f0debb;
+    border-radius: 10px;
     height: 30px;
+    width: 130px;
+    box-shadow: 0 0 5px 0 black;
+    text-shadow: 1px 1px 2px black;
+    margin-right: 30px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.buttonAllRecipes:hover{
+    transform: scale(1.1) ;
+    -webkit-transform: scale(1.1) ;
+    -moz-transform: scale(1.1) ;
 }
 
 .containerSelect{
+    display: flex;
     border-radius: 10px;
     overflow: hidden;
     object-fit: cover;
+    flex-wrap: nowrap;
     box-shadow: 0 0 5px 0 black;
 }
 
@@ -15,7 +37,7 @@
     height: 30px;
     background-color: #541734;
     color: #f0debb;
-    width: 250px;
+    width: 200px;
     padding-left: 20px;
     flex-basis: 1;
     border: 0;

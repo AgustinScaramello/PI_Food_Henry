@@ -42,10 +42,30 @@
     padding: 3px 30px 3px 30px;
     font-size: 15px;
     box-shadow: 0 0 5px 0 black;
+    resize: none;
     transition: transform 0.3s ease-in-out;
 }
 
 .inputCreate:hover{
+    transform: scale(1.03) ;
+    -webkit-transform: scale(1.03) ;
+    -moz-transform: scale(1.03) ;
+}
+
+.inputCreateTextarea{
+    border-radius: 10px;
+    height: 150px;
+    background-color: #f0debb;
+    color: #541734;
+    margin-bottom: 5px;
+    padding: 10px 30px 30px 30px;
+    font-size: 15px;
+    box-shadow: 0 0 5px 0 black;
+    resize: none;
+    transition: transform 0.3s ease-in-out;
+}
+
+.inputCreateTextarea:hover{
     transform: scale(1.03) ;
     -webkit-transform: scale(1.03) ;
     -moz-transform: scale(1.03) ;

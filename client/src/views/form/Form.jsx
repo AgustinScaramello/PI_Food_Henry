@@ -24,7 +24,7 @@ function Form() {
         healthScore: "",
         instructions: "",
         image: "",
-        diets: []
+        diets: [],
     })
 
     const dietsList = useSelector((state) => state.diets)
@@ -52,17 +52,34 @@ function Form() {
 
     const [recipeCreatedSuccessfully, setRecipeCreatedSuccessfully] = useState(false);
     const [recipeExists, setRecipeExists] = useState(false);
+    const [missingData, setMissingData] = useState(false)
 
+    const allRecipes = useSelector((state) => state.allRecipes)
+    
     const handleSubmit = async(e) =>{
-        e.preventDefault()
-        try {
-            await dispatch(postRecipe(newRecipe));
-            setRecipeCreatedSuccessfully(true);
-            setRecipeExists(false);
-          } catch (error) {
-            setRecipeCreatedSuccessfully(false);
-            setRecipeExists(true);
-          }
+        
+        const searchRecipe = allRecipes.some((recipe) => recipe.title === newRecipe.title)
+        const completeData = newRecipe.title && newRecipe.summary && newRecipe.healthScore && newRecipe.instructions && newRecipe.image && newRecipe.diets
+
+
+        if(!newRecipe.title || !newRecipe.summary || !newRecipe.healthScore || !newRecipe.instructions || !newRecipe.image || !newRecipe.diets){
+            e.preventDefault()
+            setRecipeExists(false)
+            setMissingData(true)
+        }
+        
+        if(searchRecipe){
+            e.preventDefault()
+            setMissingData(false)
+            setRecipeExists(true)
+        }
+        
+        if(!searchRecipe && completeData){
+            e.preventDefault()
+            dispatch(postRecipe(newRecipe))
+            setRecipeCreatedSuccessfully(true)
+        }
+        
     }
     
 
@@ -70,7 +87,7 @@ function Form() {
         dispatch(getDiets()) 
     }, [dispatch])
 
-    if(recipeCreatedSuccessfully === false){
+    if(!recipeCreatedSuccessfully){
 
     return ( 
         <div className={styled.divGeneralCreate}>
@@ -78,31 +95,31 @@ function Form() {
             <form className={styled.formCreate} onSubmit={handleSubmit}>
                 <div className={styled.containerInputCreate}>
                     <label htmlFor="" className={styled.labelCreate}>Nombre</label>
-                    <input type="text" className={styled.inputCreate} name="title" value={newRecipe.title} onChange={handleChange} />
+                    <input type="text" className={styled.inputCreate} name="title" value={newRecipe.title} onChange={handleChange} placeholder="Ej.: Arroz con pollo"/>
                     <p className={styled.errorsCreate}>{errors.title}</p>
                 </div>
 
                 <div className={styled.containerInputCreate}>
                     <label htmlFor="" className={styled.labelCreate}>Resumen de plato</label>
-                    <input type="text" className={styled.inputCreate} name="summary" value={newRecipe.summary} onChange={handleChange} />
+                    <input type="text" className={styled.inputCreate} name="summary" value={newRecipe.summary} onChange={handleChange} placeholder="Ej.: Plato preparado con arroz hervido..."/>
                     <p className={styled.errorsCreate}>{errors.summary}</p>
                 </div>
 
                 <div className={styled.containerInputCreate}>
                     <label htmlFor="" className={styled.labelCreate}>Nivel de comida saludable</label>
-                    <input type="number" max={100} min={1} className={styled.inputCreate} name="healthScore" value={newRecipe.healthScore} onChange={handleChange} />
+                    <input type="number" max={100} min={1} className={styled.inputCreate} name="healthScore" value={newRecipe.healthScore} onChange={handleChange} placeholder="Numero de 1 a 100"/>
                     <p className={styled.errorsCreate}>{errors.healthScore}</p>
                 </div>
 
                 <div className={styled.containerInputCreate}>
                     <label htmlFor="" className={styled.labelCreate}>Paso a paso</label>
-                    <input type="text" className={styled.inputCreate} name="instructions" value={newRecipe.instructions} onChange={handleChange} />
+                    <textarea className={styled.inputCreateTextarea} name="instructions" value={newRecipe.instructions} onChange={handleChange} id="" cols="30" rows="30" ></textarea>
                     <p className={styled.errorsCreate}>{errors.instructions}</p>
                 </div>
 
                 <div className={styled.containerInputCreate}>
                     <label htmlFor="" className={styled.labelCreate}>Imagen</label>
-                    <input type="url" className={styled.inputCreate} name="image" value={newRecipe.image} onChange={handleChange} />
+                    <input type="url" className={styled.inputCreate} name="image" value={newRecipe.image} onChange={handleChange} placeholder="URL de una imagen"/>
                     <p className={styled.errorsCreate}>{errors.image}</p>
                 </div>
 
@@ -118,12 +135,13 @@ function Form() {
                 <p className={styled.errorsCreate}>{errors.diets}</p>
                 <div className={styled.containerButtonCreate}>
                     <button className={styled.buttonCreate} type="submit">Crear</button>
-                    {recipeExists === true && (<p className={styled.errorsCreate}>Faltan datos o la receta ya existe</p>)}
+                    {missingData && (<p className={styled.errorsCreate}>Faltan datos por completar</p>)}
+                    {recipeExists && (<p className={styled.errorsCreate}>La receta ya existe</p>)}
                 </div>
             </form>
         </div>
     )
-    }else{
+    }else if(recipeCreatedSuccessfully){
         return(
             <Confirmation/>
         )

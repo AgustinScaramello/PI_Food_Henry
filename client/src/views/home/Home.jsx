@@ -30,6 +30,11 @@ function Home() {
 
     //Filtros----------------------------------------------------------------------
     const diets = useSelector((state) => state.diets)
+    
+    const handleAllRecipes = () => {
+        setCurrentPage(1)
+        dispatch(getRecipes())
+    }
 
     const handleFilterByDiet = (e) => {
         setCurrentPage(1)
@@ -37,13 +42,8 @@ function Home() {
     }
     
     const handleFilterByOrigin = (e) => {
-        if(e.target.value === "AllRecipes"){
-            setCurrentPage(1)
-            dispatch(getRecipes())
-        }else{
-            setCurrentPage(1)
-            dispatch(filterCardsByOrigin(e.target.value))
-        }
+        setCurrentPage(1)
+        dispatch(filterCardsByOrigin(e.target.value))
     }
     //-----------------------------------------------------------------------------
 
@@ -102,7 +102,9 @@ function Home() {
         <div className={styled.containerHome}>
 
             <div className={styled.filterAndSearch}>
+
                 <FilterAndOrder  
+                    handleAllRecipes={handleAllRecipes}
                     handleFilterByOrigin={handleFilterByOrigin}
                     handleFilterByDiet={handleFilterByDiet}
                     handleOrderAlphabetically={handleOrderAlphabetically}

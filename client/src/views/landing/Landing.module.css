@@ -5,6 +5,9 @@
     align-items: center;
     height: 100vh;    
 }
+.logo{
+    height: 70px;
+}
 
 .infochef{
     font-size: 30px;

@@ -1,12 +1,12 @@
 import styled from "./FilterAndOrder.module.css"
 
-function FilterAndOrder({ handleFilterByOrigin, handleFilterByDiet, handleOrderAlphabetically, handelOrderHealthScore, diets }){
+function FilterAndOrder({ handleAllRecipes, handleFilterByOrigin, handleFilterByDiet, handleOrderAlphabetically, handelOrderHealthScore, diets }){
     return(
         <div className={styled.filters}>
+            <button onClick={handleAllRecipes} className={styled.buttonAllRecipes}>Todas las recetas</button>
             <div className={styled.containerSelect}>
                 <select onChange={handleFilterByOrigin} className={styled.select}>
                     <option hidden selected>Recipes By</option>
-                    <option value="AllRecipes" className={styled.options}>Todas las recetas</option>
                     <option value="API" className={styled.options}>API</option>
                     <option value="DB" className={styled.options}>DataBase</option>
                 </select>
