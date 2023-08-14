@@ -1,6 +1,5 @@
 export default function validation(recipeData) {
   const regexURL = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(\/\S*)?$/;
-  const regexIncludesNumber = /\d/;
 
   const errors = {};
 
@@ -12,16 +11,19 @@ export default function validation(recipeData) {
     errors.summary = "No puede tener menos de 50 caracteres";
 
   if (
-    !regexIncludesNumber.test(recipeData.healthScore) &&
-    recipeData.healthScore > 0 &&
-    recipeData.healthScore <= 100
+    parseFloat(recipeData.healthScore) === 0 ||
+    parseFloat(recipeData.healthScore) > 100
   )
-    errors.healthScore = "Debe ser un numero entre 1 y 100";
+    errors.healthScore = "No puede ser menor que 1 y mayor que 100";
 
   if (recipeData.instructions.length < 50)
     errors.instructions = "No puede tener menos de 50 caracteres";
 
   if (!regexURL.test(recipeData.image)) errors.image = "Debe ser una URL";
+
+  if (recipeData.diets.length === 0)
+    errors.diets =
+      'Debe seleccionar al menos una Diet, en caso de no tener selecciona "ninguna"';
 
   return errors;
 }

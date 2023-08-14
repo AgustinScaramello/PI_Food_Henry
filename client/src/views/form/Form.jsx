@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux"
 import { postRecipe, getDiets } from "../../redux/actions";
 import validation from "./validations";
 import styled from "./Form.module.css"
+import Confirmation from "../../components/confirmation/Confirmation";
 
 function Form() {
 
@@ -23,6 +24,7 @@ function Form() {
         healthScore: "",
         instructions: "",
         image: "",
+        diets: []
     })
 
     const dietsList = useSelector((state) => state.diets)
@@ -39,23 +41,36 @@ function Form() {
 
         const updatedDiets = newRecipe.diets.includes(selectedDiet)
             ? newRecipe.diets.filter((diet) => diet !== selectedDiet)
-            : [...newRecipe.diets, selectedDiet];
+            : [...newRecipe.diets, selectedDiet]
 
         setNewRecipe({
             ...newRecipe,
             diets: updatedDiets,
         });
+        setErrors(validation({...newRecipe, diets: updatedDiets}))
     }
 
-    const handleSubmit = (e) =>{
+    const [recipeCreatedSuccessfully, setRecipeCreatedSuccessfully] = useState(false);
+    const [recipeExists, setRecipeExists] = useState(false);
+
+    const handleSubmit = async(e) =>{
         e.preventDefault()
-        dispatch(postRecipe(newRecipe))
+        try {
+            await dispatch(postRecipe(newRecipe));
+            setRecipeCreatedSuccessfully(true);
+            setRecipeExists(false);
+          } catch (error) {
+            setRecipeCreatedSuccessfully(false);
+            setRecipeExists(true);
+          }
     }
     
 
     useEffect(()=>{
         dispatch(getDiets()) 
     }, [dispatch])
+
+    if(recipeCreatedSuccessfully === false){
 
     return ( 
         <div className={styled.divGeneralCreate}>
@@ -75,7 +90,7 @@ function Form() {
 
                 <div className={styled.containerInputCreate}>
                     <label htmlFor="" className={styled.labelCreate}>Nivel de comida saludable</label>
-                    <input type="number" max={100} min={0} className={styled.inputCreate} name="healthScore" value={newRecipe.healthScore} onChange={handleChange} />
+                    <input type="number" max={100} min={1} className={styled.inputCreate} name="healthScore" value={newRecipe.healthScore} onChange={handleChange} />
                     <p className={styled.errorsCreate}>{errors.healthScore}</p>
                 </div>
 
@@ -100,13 +115,19 @@ function Form() {
                         </div>
                     ))}
                 </div>
-                <p>{errors.diets}</p>
+                <p className={styled.errorsCreate}>{errors.diets}</p>
                 <div className={styled.containerButtonCreate}>
                     <button className={styled.buttonCreate} type="submit">Crear</button>
+                    {recipeExists === true && (<p className={styled.errorsCreate}>Faltan datos o la receta ya existe</p>)}
                 </div>
             </form>
         </div>
-     )
+    )
+    }else{
+        return(
+            <Confirmation/>
+        )
+    }
 }
 
 export default Form;

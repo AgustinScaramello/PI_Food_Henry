@@ -42,9 +42,13 @@ function rootReducer(state = initialState, action) {
         diets: action.payload,
       };
     case FILTER_DIETS:
-      const filteredDiets = state.allRecipes.filter((recipe) =>
-        recipe.diets.includes(action.payload)
-      );
+      const filteredDiets = state.allRecipes.filter((recipe) => {
+        if (recipe.Diets) {
+          return recipe.Diets.some((diet) => diet.name === action.payload);
+        } else {
+          return recipe.diets?.includes(action.payload);
+        }
+      });
       return {
         ...state,
         recipes: filteredDiets,

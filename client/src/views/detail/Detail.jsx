@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux"
 import {useParams} from "react-router-dom"
 import styled from "./Detail.module.css"
 import { getRecipeDetail } from "../../redux/actions"
-import HTMLReactParser from 'html-react-parser';
 import Loading from "../../components/loading/Loading"
 
 function Detail() {
@@ -40,10 +39,6 @@ function Detail() {
 
     const dietsList = Array.isArray(diets) ? diets.join(', ') : '';
 
-    const summaryRender = summary ? HTMLReactParser(summary.toString()) : summary
-    const instructionsRender = instructions ? HTMLReactParser(instructions.toString()) : instructions
-
-
     return ( 
         <div className={styled.containerDetail}>
             <div className={styled.containerImageDetail}>
@@ -54,7 +49,7 @@ function Detail() {
             <div className={styled.containerInfoDetail}>
                 <div>
                     <h2 className={styled.indexInfoDetail}>Resumen de plato:</h2>
-                    <h3 className={styled.infoDetail} >{summaryRender}</h3>
+                    <div className={styled.infoDetail} dangerouslySetInnerHTML={{ __html: summary }} />
                 </div>
                 <div>
                     <h2 className={styled.indexInfoDetail}>Nivel de comida saludable:</h2>
@@ -62,7 +57,7 @@ function Detail() {
                 </div>
                 <div>
                     <h2 className={styled.indexInfoDetail}>Paso a paso:</h2>
-                    <h3 className={styled.infoDetail}>{instructionsRender}</h3>
+                    <div className={styled.infoDetail} dangerouslySetInnerHTML={{ __html: instructions }} />
                 </div>
                 <div>
                     <h2 className={styled.indexInfoDetail}>Tipo de dieta:</h2>

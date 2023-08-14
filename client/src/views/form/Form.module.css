@@ -42,6 +42,13 @@
     padding: 3px 30px 3px 30px;
     font-size: 15px;
     box-shadow: 0 0 5px 0 black;
+    transition: transform 0.3s ease-in-out;
+}
+
+.inputCreate:hover{
+    transform: scale(1.03) ;
+    -webkit-transform: scale(1.03) ;
+    -moz-transform: scale(1.03) ;
 }
 
 .errorsCreate{
@@ -65,6 +72,7 @@
     padding: 30px;
     border-radius: 20px;
     margin-top: 20px;
+    margin-bottom: 10px;
     flex-wrap: wrap;
     box-shadow: 0 0 10px 0 black;
 }
@@ -72,6 +80,13 @@
 .containerInputDietsCreate{
     width: calc(33.33% - 10px);
     padding: 15px 0 15px 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.containerInputDietsCreate:hover{
+    transform: scale(1.05) ;
+    -webkit-transform: scale(1.05) ;
+    -moz-transform: scale(1.05) ;
 }
 
 .labelDietsCheckbox{
@@ -88,7 +103,8 @@
 .containerButtonCreate{
     margin-top: 20px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .buttonCreate{
@@ -101,4 +117,12 @@
     cursor: pointer;
     text-shadow: 1px 1px 1px black;
     box-shadow: 0 0 10px 0 black;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.buttonCreate:hover{
+    transform: scale(1.1) ;
+    -webkit-transform: scale(1.1) ;
+    -moz-transform: scale(1.1) ;
 }

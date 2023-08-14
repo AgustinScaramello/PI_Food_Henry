@@ -47,16 +47,20 @@
 }
 
 .indexInfoDetail{
+    font-size: 27px;
+    font-weight: bolder;
     color: #f0debb;
-    margin: 0 110px 0 110px;
+    margin: 0 110px 20px 110px;
     width: 80%;
     margin-top: 40px;
     text-shadow: 2px 2px 2px black;
 }
 
 .infoDetail{
+    font-size: 20px;
+    font-weight: bold;
     color: #f0debb;
-    margin: 0 110px 0 110px;
+    margin: 0 110px 30px 110px;
     width: 80%;
     margin-top: 5px;
     text-shadow: 2px 2px 2px black;
