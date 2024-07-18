@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {useDispatch, useSelector} from "react-redux"
-import {filterCardsByDiets, filterCardsByOrigin, getByName, getDiets, getRecipes, sortCardsAlphabetically, sortCardsByHealthScore} from "../../redux/actions"
+import {filterAllRecipes, filterCardsByDiets, filterCardsByOrigin, getDiets, getRecipes, sortCardsAlphabetically, sortCardsByHealthScore} from "../../redux/actions"
 
 import Cards from "../../components/cards/Cards";
 import SearchBar from "../../components/searchbar/SearchBar";
@@ -14,26 +14,12 @@ function Home() {
     const dispatch = useDispatch()
     const recipes = useSelector((state) => state.recipes)
 
-    //SearchBar-------------------------------------------------------------------
-    const [searchString, setSearchString] = useState("")
-
-    function handleChange(e){
-        e.preventDefault()
-        setSearchString(e.target.value.toLowerCase())
-    }
-
-    function handleSubmit(e){
-        e.preventDefault()
-        dispatch(getByName(searchString))
-    }
-    //-----------------------------------------------------------------------------
-
     //Filtros----------------------------------------------------------------------
     const diets = useSelector((state) => state.diets)
     
     const handleAllRecipes = () => {
         setCurrentPage(1)
-        dispatch(getRecipes())
+        dispatch(filterAllRecipes())
     }
 
     const handleFilterByDiet = (e) => {
@@ -112,7 +98,7 @@ function Home() {
                     diets={diets}
                 />
 
-                <SearchBar handleChange={handleChange} handleSubmit={handleSubmit} />
+                <SearchBar />
             </div>
 
             <Cards recipes={recipeShow} />

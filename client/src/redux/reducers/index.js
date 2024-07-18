@@ -1,4 +1,6 @@
 import {
+  FILTER_NAME,
+  FILTER_ALL_RECIPES,
   FILTER_DIETS,
   FILTER_ORIGIN,
   GET_BY_NAME,
@@ -40,6 +42,19 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         diets: action.payload,
+      };
+    case FILTER_NAME:
+      const filteredName = state.allRecipes.filter((recipe) =>
+        recipe.title.toLowerCase().includes(action.payload.toLowerCase())
+      );
+      return {
+        ...state,
+        recipes: filteredName,
+      };
+    case FILTER_ALL_RECIPES:
+      return {
+        ...state,
+        recipes: state.allRecipes,
       };
     case FILTER_DIETS:
       const filteredDiets = state.allRecipes.filter((recipe) => {
